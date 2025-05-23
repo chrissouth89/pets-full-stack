@@ -14,6 +14,7 @@ const create = async (formData) => {
         const res = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`, 
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
@@ -29,6 +30,7 @@ const update = async (formData, petId) => {
         const res = await fetch(`${BASE_URL}/${petId}`, {
             method: 'PUT',
             headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
@@ -44,6 +46,7 @@ const deletePet = async (petId) => {
         const res = await fetch(`${BASE_URL}/${petId}`, {
             method: "DELETE",
             headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': "application/json"
             },
         })

@@ -1,9 +1,13 @@
 import './App.css'
 import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router'
 import * as petService from './services/petService'
 import PetList from './components/PetList/PetList'
 import PetDetail from './components/PetDetail/PetDetail'
 import PetForm from './components/PetForm/PetForm'
+import NavBar from './components/NavBar/NavBar'
+import SignUpForm from './components/SignUpForm/SignUpForm'
+import SignInForm from './components/SignInForm/SignInForm'
 
 function App() {
   const [pets, setPets] = useState([])
@@ -94,6 +98,11 @@ const handleDeletePet = async (petId) => {
 
   return (
     <>
+    <NavBar />
+    <Routes>
+      <Route path='/sign-up' element={<SignUpForm />} />
+      <Route path='/sign-in' element={<SignInForm />} />
+    </Routes>
       <PetList pets={pets} handleSelect={handleSelect} handleFormView={handleFormView} isFormOpen={isFormOpen} />
       {isFormOpen ? (
         <PetForm handleAddPet={handleAddPet} selected={selected} handleUpdatePet={handleUpdatePet}/>

@@ -2,8 +2,10 @@ const Pet = require('../models/pet')
 const express = require('express')
 const router = express.Router()
 
+const verifyToken = require('../middleware/verify-token')
+
 // create
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     try {
         const createdPet = await Pet.create(req.body)
         res.status(201).json(createdPet)
@@ -41,7 +43,7 @@ router.get('/:petId', async (req, res) => {
 })
 
 // delete
-router.delete('/:petId', async (req, res) => {
+router.delete('/:petId', verifyToken, async (req, res) => {
     try {
         const deletedPet = await Pet.findByIdAndDelete(req.params.petId)
         if(!deletedPet) {
@@ -59,7 +61,7 @@ router.delete('/:petId', async (req, res) => {
 })
 
 // update
-router.put('/:petId', async (req, res) => {
+router.put('/:petId', verifyToken, async (req, res) => {
     try {
         const updatedPet = await Pet.findByIdAndUpdate(req.params.petId, req.body, {new: true})
         if(!updatedPet) {

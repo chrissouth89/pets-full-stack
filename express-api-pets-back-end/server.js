@@ -8,6 +8,9 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000
 
 const petRouter = require('./controllers/pets')
+const testRouter = require('./controllers/test-jwt')
+const authRouter = require('./controllers/auth')
+const userRouter = require('./controllers/users')
 
 app.use(cors({ origin: 'http://localhost:5173' }))
 
@@ -22,6 +25,9 @@ app.use(logger('dev'));
 
 // Routes go here
 app.use('/pets', petRouter)
+app.use('/test', testRouter)
+app.use('/users', userRouter)
+app.use('/auth', authRouter)
 
 app.listen(PORT, () => {
   console.log('The express app is ready!');
